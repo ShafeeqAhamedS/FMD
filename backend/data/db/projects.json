@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Salary Prediction Model",
+    "description": "Predicts salary based on position & level",
+    "user": "e44930f2-4a97-4a13-b630-9c384c237b51",
+    "tags": [],
+    "status": "deployed",
+    "_id": "b26034aa-1f90-4358-9dd8-0e1227afac4f",
+    "createdAt": "2025-03-01T20:31:03.284Z",
+    "zipFilePath": "/uploads/e44930f2-4a97-4a13-b630-9c384c237b51/b26034aa-1f90-4358-9dd8-0e1227afac4f/project_1740861083307.zip",
+    "updatedAt": "2025-03-01T20:35:25.234Z",
+    "deployedIP": "52.90.251.180"
+  },
+  {
+    "title": "Simple score prediction",
+    "description": "Predict exam scores based on hours of study",
+    "user": "e44930f2-4a97-4a13-b630-9c384c237b51",
+    "tags": [],
+    "status": "processing",
+    "_id": "d1fd09e9-0f60-42ee-a0ec-0369bb5b662e",
+    "createdAt": "2025-03-01T21:08:15.377Z",
+    "zipFilePath": "/uploads/e44930f2-4a97-4a13-b630-9c384c237b51/d1fd09e9-0f60-42ee-a0ec-0369bb5b662e/project_1740863317178.zip",
+    "updatedAt": "2025-03-01T21:13:19.227Z",
+    "deployedIP": "34.201.172.29"
+  }
+]

@@ -1,0 +1,56 @@
+---
+- name: Setup EC2 Application
+  hosts: my_ec2
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: Copy genrated backend file from local to EC2
+      copy:
+        src: "/var/lib/jenkins/workspace/FMD/workspace/file_genration/backend/main.py"
+        dest: "{{ backend_directory }}"
+        mode: '0755'
+      
+    - name: Copy Files from local to remote
+      copy:
+        src: "/var/lib/jenkins/workspace/FMD/workspace/file_genration/generate_code/user_input/"
+        dest: "{{ backend_directory }}"
+        mode: '0755'
+
+    - name: Restart FastAPI service
+      systemd:
+        name: fastapi
+        state: restarted
+      become: yes 
+
+    - name: Install packages at {{ frontend_directory }}
+      shell: cd {{ frontend_directory }} && npm install
+
+    - name: Create Frontend API Route File
+      template:
+        src: "templates/api_route.js"
+        dest: "{{ frontend_directory }}/src/"
+        mode: '0755'
+
+    - name: Copy genrated frontend file from local to EC2
+      copy:
+        src: "/var/lib/jenkins/workspace/FMD/workspace/file_genration/frontend/src/App.jsx"
+        dest: "{{ frontend_directory }}/src/"
+        mode: '0755'
+
+    - name: Build frontend
+      shell: cd {{ frontend_directory }} && npm run build
+
+    - name: Copy built frontend to nginx location
+      copy:
+        src: "{{ frontend_directory }}/dist/"
+        dest: "{{ nginx_location }}"
+        mode: '0755'
+        remote_src: yes
+      become: yes  # sudo to copy to nginx directory
+
+    - name: Restart nginx service
+      systemd:
+        name: nginx
+        state: restarted
+      become: yes  # sudo to restart nginx service

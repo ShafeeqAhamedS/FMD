@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Shafeeq Ahamed",
+    "email": "shafeeq@example.com",
+    "password": "$2a$10$EdiEHUkvh0Rf3krU5QjkLebJPvki3ZmuwFdQzZhizyrxXWZQp3St6",
+    "profilePic": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
+    "bio": "",
+    "_id": "a88e8078-00b4-4ebf-9a91-5832c7235f6c",
+    "createdAt": "2025-03-01T08:03:04.491Z",
+    "updatedAt": "2025-03-01T08:24:40.391Z"
+  },
+  {
+    "name": "Web test user",
+    "email": "test1@mail.com",
+    "password": "$2a$10$xyuT622pKJicqIIzNG5JGOQqNiDixFWCIHc3sv6u3KuISSxl6eyKK",
+    "profilePic": "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
+    "bio": "Hello",
+    "_id": "e44930f2-4a97-4a13-b630-9c384c237b51",
+    "createdAt": "2025-03-01T10:24:57.028Z",
+    "updatedAt": "2025-03-01T10:47:48.092Z"
+  }
+]
