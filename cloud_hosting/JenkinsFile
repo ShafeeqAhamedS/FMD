@@ -1,0 +1,101 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'PROJECT_ID',, description: 'Project ID for the API call')
+        password(name: 'AUTH_TOKEN', description: 'Authorization Token')
+    }
+
+    environment {
+        GIT_REPO = 'https://github.com/ShafeeqAhamedS/FMD-Final.git'  // Change this to your repo
+        ZIP_FILE = 'project.zip'
+        EXTRACT_DIR = 'workspace/file_genration/generate_code/user_input'
+        BACKEND_URL = 'http://localhost:5000/api/v1/projects'
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                script {
+                    sh 'rm -rf workspace && mkdir workspace' // Clean workspace
+                    sh "git clone $GIT_REPO workspace"
+                }
+            }
+        }
+
+        stage('Download and Extract ZIP') {
+            steps {
+                script {
+                    sh """
+                        curl -X 'GET' "$BACKEND_URL/$PROJECT_ID/download" \\
+                          -H 'accept: application/zip' \\
+                          -H "Authorization: Bearer $AUTH_TOKEN" \\
+                          --output $ZIP_FILE
+                        rm -rf $EXTRACT_DIR
+                        mkdir -p $EXTRACT_DIR
+                        unzip -o $ZIP_FILE -d $EXTRACT_DIR
+                    """
+                }
+            }
+        }
+
+        stage('Run Python Script') {
+            steps {
+                script {
+                    // Use withCredentials block to access secrets in Jenkins
+                    withCredentials([string(credentialsId: 'API_KEY', variable: 'API_KEY'),
+                                      string(credentialsId: 'MODEL_NAME', variable: 'MODEL_NAME')]) {
+                        // Set the secrets as environment variables in the script
+                        sh """
+                            . venv/bin/activate
+                            export API_KEY=$API_KEY
+                            export MODEL_NAME=$MODEL_NAME
+                            python3 workspace/file_genration/main.py
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Run Terraform') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
+                                    string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        sh '''
+                            export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+                            export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+                            cd workspace/cloud_hosting
+                            cp /var/lib/jenkins/workspace/FMD/shafeeq-thinkpad.pem  /var/lib/jenkins/workspace/FMD/workspace/cloud_hosting/shafeeq-thinkpad.pem
+                            chmod 600 shafeeq-thinkpad.pem
+                            terraform init
+                            terraform apply -auto-approve
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Get Terraform Output') {
+            steps {
+                script {
+                    def instanceIP = sh(script: '''
+                        cd workspace/cloud_hosting
+                        terraform output -raw instance_public_ip
+                    ''', returnStdout: true).trim()
+
+                    echo "EC2 Instance Public IP: ${instanceIP}"
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Job finished'
+        }
+        failure {
+            echo 'Job failed! Check logs for details.'
+        }
+    }
+}

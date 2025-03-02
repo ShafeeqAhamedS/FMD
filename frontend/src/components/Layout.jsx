@@ -72,7 +72,7 @@ export default function Layout() {
 
   if (!isAuthenticated) {
     console.log('🚫 User not authenticated, redirecting to login');
-    navigate('/login');
+    window.location.href = '/login';
     return null;
   }
 
