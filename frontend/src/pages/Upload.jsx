@@ -3,6 +3,7 @@ import axios from 'axios';
 import JSZip from 'jszip';
 import { FileUpload } from '../components/FileUpload';
 import logger from '../utils/logger';
+import { useNavigate } from 'react-router-dom';
 
 const Upload = () => {
   const [files, setFiles] = useState({
@@ -14,6 +15,7 @@ const Upload = () => {
   const [message, setMessage] = useState('');
   const [projectId, setProjectId] = useState('');
   const [countdown, setCountdown] = useState(10);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedProjectId = localStorage.getItem('projectId');
@@ -113,7 +115,8 @@ const Upload = () => {
         });
         const buildNumber = buildInfoResponse.data.lastBuild.number;
         localStorage.setItem('buildNumber', buildNumber);
-        window.location.href = '/deploying_page';
+        // Use React Router navigation instead of window.location
+        navigate('/deploying_page');
       } else {
         setMessage('Files uploaded but failed to trigger deployment. Please try deploying manually.');
       }

@@ -186,7 +186,7 @@ export default function ProjectPreview() {
           <div className="mt-4">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Deployed IP:</h3>
             <p className="text-sm text-gray-500 dark:text-gray-400">{selectedProject.deployedIP}</p>
-            <iframe src={`http://${selectedProject.deployedIP}`} className="w-full h-64 mt-2 border rounded" title="Deployed Project"></iframe>
+            <iframe src={`http://${selectedProject.deployedIP}`} className="w-full h-96 mt-2 border rounded" title="Deployed Project"></iframe>
           </div>
         )}
       </div>

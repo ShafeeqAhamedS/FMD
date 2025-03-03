@@ -8,7 +8,7 @@ import Deploy from './pages/Deploy.jsx';
 import Profile from './pages/Profile.jsx';
 import ProjectPreview from './pages/ProjectPreview.jsx';
 import Upload from './pages/Upload.jsx';
-import NewPage from './pages/CheckDeployment.jsx';
+import CheckDeployment from './pages/CheckDeployment.jsx';
 import { useAuthStore } from './store/auth.js';
 
 function PrivateRoute({ children }) {
@@ -95,7 +95,7 @@ function App() {
             path="deploying_page"
             element={
               <PrivateRoute>
-                <NewPage />
+                <CheckDeployment />
               </PrivateRoute>
             }
           />

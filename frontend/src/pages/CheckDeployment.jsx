@@ -3,7 +3,7 @@ import axios from 'axios';
 import logger, { log } from '../utils/logger';
 import { CircularProgress } from '@mui/material';
 
-const NewPage = () => {
+const CheckDeployment = () => {
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(true);
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -38,6 +38,20 @@ const NewPage = () => {
     }
   };
 
+  const retryRequest = async (requestFn, retries = 3, delay = 1000) => {
+    for (let i = 0; i < retries; i++) {
+      try {
+        return await requestFn();
+      } catch (error) {
+        if (i < retries - 1) {
+          await new Promise(resolve => setTimeout(resolve, delay));
+        } else {
+          throw error;
+        }
+      }
+    }
+  };
+
   useEffect(() => {
     const checkDeploymentStatus = async () => {
       try {
@@ -59,34 +73,34 @@ const NewPage = () => {
             if (jobStatusResponse.data.result === 'SUCCESS') {
               const ec2PublicIP = await getDeploymentInstanceIP();
               if (ec2PublicIP) {
-                await axios.put(`http://localhost:5000/api/v1/projects/${projectId}`, { 
-                  ec2PublicIP, 
+                await retryRequest(() => axios.put(`http://localhost:5000/api/v1/projects/${projectId}`, { 
+                  ec2PublicIP: ec2PublicIP, 
                   status: 'deployed'
                 }, {
                   headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                   }
-                });
+                }));
                 setStatus(`Job completed successfully! Deployed at IP: ${ec2PublicIP}`);
               } else {
-                await axios.put(`http://localhost:5000/api/v1/projects/${projectId}`, { 
+                await retryRequest(() => axios.put(`http://localhost:5000/api/v1/projects/${projectId}`, { 
                   status: 'failed'
                 }, {
                   headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                   }
-                });
+                }));
                 setStatus('Job completed successfully, but failed to retrieve IP.');
               }
               logger.info('Job completed successfully');
             } else {
-              await axios.put(`http://localhost:5000/api/v1/projects/${projectId}`, { 
+              await retryRequest(() => axios.put(`http://localhost:5000/api/v1/projects/${projectId}`, { 
                 status: 'failed'
               }, {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
-              });
+              }));
               setStatus('Job failed.');
               logger.error('Job failed');
             }
@@ -111,13 +125,13 @@ const NewPage = () => {
       const initializeDeployment = async () => {
         try {
           // Set initial status to processing
-          await axios.put(`http://localhost:5000/api/v1/projects/${projectId}`, { 
+          await retryRequest(() => axios.put(`http://localhost:5000/api/v1/projects/${projectId}`, { 
             status: 'processing'
           }, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`
             }
-          });
+          }));
           checkDeploymentStatus();
         } catch (error) {
           logger.error('Error initializing deployment:', error);
@@ -169,4 +183,4 @@ const NewPage = () => {
   );
 };
 
-export default NewPage;
+export default CheckDeployment;
