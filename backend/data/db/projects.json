@@ -22,17 +22,5 @@
     "zipFilePath": "/uploads/e44930f2-4a97-4a13-b630-9c384c237b51/d1fd09e9-0f60-42ee-a0ec-0369bb5b662e/project_1740863317178.zip",
     "updatedAt": "2025-03-01T21:13:19.227Z",
     "deployedIP": "34.201.172.29"
-  },
-  {
-    "title": "Test Deployment",
-    "description": "Checking for youtube presentation",
-    "user": "e44930f2-4a97-4a13-b630-9c384c237b51",
-    "tags": [],
-    "status": "deployed",
-    "_id": "8a11a416-2c1b-411d-86b6-d13fa6f0205a",
-    "createdAt": "2025-03-03T18:39:05.837Z",
-    "zipFilePath": "/uploads/e44930f2-4a97-4a13-b630-9c384c237b51/8a11a416-2c1b-411d-86b6-d13fa6f0205a/project_1741027172510.zip",
-    "updatedAt": "2025-03-03T18:44:13.965Z",
-    "deployedIP": "54.211.139.102"
   }
 ]
