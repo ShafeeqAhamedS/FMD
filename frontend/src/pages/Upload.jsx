@@ -92,7 +92,7 @@ const Upload = () => {
       const zipBlob = await zip.generateAsync({ type: 'blob' });
       const formData = new FormData();
       formData.append('projectZip', zipBlob, 'project.zip');
-      const response = await axios.post(`http://localhost:5000/api/v1/projects/${projectId}/upload`, formData, {
+      const response = await axios.post(`http://44.211.200.94:5000/api/v1/projects/${projectId}/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${localStorage.getItem('token')}`,

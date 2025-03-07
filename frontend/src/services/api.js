@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { info, error as logError, debug } from '../utils/logger';
 
-const API_URL = 'http://localhost:5000/api/v1';
+const API_URL = 'http://44.211.200.94:5000/api/v1';
 
 // Create logger function to standardize log format
 const logAPI = (type, endpoint, data) => {

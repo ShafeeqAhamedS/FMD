@@ -10,7 +10,7 @@ pipeline {
         GIT_REPO = 'https://github.com/ShafeeqAhamedS/FMD-Final.git'  // Change this to your repo
         ZIP_FILE = 'project.zip'
         EXTRACT_DIR = 'workspace/file_genration/generate_code/user_input'
-        BACKEND_URL = 'http://localhost:5000/api/v1/projects'
+        BACKEND_URL = 'http://44.211.200.94:5000/api/v1/projects'
     }
 
     stages {

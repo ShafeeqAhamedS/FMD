@@ -20,7 +20,7 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:5000/api/v1',
+        url: 'http://44.211.200.94:5000/api/v1',
         description: 'Local Development Server'
       }
     ],

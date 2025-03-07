@@ -48,7 +48,7 @@ Creates a new user account.
 
 **Example Request:**
 ```bash
-curl -X POST http://localhost:5000/api/v1/users/register \
+curl -X POST http://44.211.200.94:5000/api/v1/users/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "John Doe",
@@ -94,7 +94,7 @@ Authenticates a user and returns a token.
 
 **Example Request:**
 ```bash
-curl -X POST http://localhost:5000/api/v1/users/login \
+curl -X POST http://44.211.200.94:5000/api/v1/users/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "john.doe@example.com",
@@ -132,7 +132,7 @@ Returns the currently logged-in user's profile.
 
 **Example Request:**
 ```bash
-curl -X GET http://localhost:5000/api/v1/users/me \
+curl -X GET http://44.211.200.94:5000/api/v1/users/me \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 
@@ -171,7 +171,7 @@ Updates the user's basic profile information.
 
 **Example Request:**
 ```bash
-curl -X PUT http://localhost:5000/api/v1/users/update \
+curl -X PUT http://44.211.200.94:5000/api/v1/users/update \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
   -d '{
@@ -217,7 +217,7 @@ Updates the user's password.
 
 **Example Request:**
 ```bash
-curl -X PUT http://localhost:5000/api/v1/users/update-password \
+curl -X PUT http://44.211.200.94:5000/api/v1/users/update-password \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
   -d '{
@@ -256,7 +256,7 @@ Updates the user's profile picture.
 
 **Example Request:**
 ```bash
-curl -X PUT http://localhost:5000/api/v1/users/update-profile-pic \
+curl -X PUT http://44.211.200.94:5000/api/v1/users/update-profile-pic \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
   -F "profilePic=@/path/to/image.jpg"
 ```
@@ -302,7 +302,7 @@ Creates a new project.
 
 **Example Request:**
 ```bash
-curl -X POST http://localhost:5000/api/v1/projects \
+curl -X POST http://44.211.200.94:5000/api/v1/projects \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
   -d '{
@@ -353,7 +353,7 @@ Retrieves all projects belonging to the logged-in user.
 
 **Example Request:**
 ```bash
-curl -X GET "http://localhost:5000/api/v1/projects?status=published&tag=react&sort=createdAt&order=desc" \
+curl -X GET "http://44.211.200.94:5000/api/v1/projects?status=published&tag=react&sort=createdAt&order=desc" \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 
@@ -408,7 +408,7 @@ Retrieves details for a specific project.
 
 **Example Request:**
 ```bash
-curl -X GET http://localhost:5000/api/v1/projects/7f9c82e0-8beC-4ab8-8984-98f86346985f \
+curl -X GET http://44.211.200.94:5000/api/v1/projects/7f9c82e0-8beC-4ab8-8984-98f86346985f \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 
@@ -460,7 +460,7 @@ Updates an existing project.
 
 **Example Request:**
 ```bash
-curl -X PUT http://localhost:5000/api/v1/projects/7f9c82e0-8beC-4ab8-8984-98f86346985f \
+curl -X PUT http://44.211.200.94:5000/api/v1/projects/7f9c82e0-8beC-4ab8-8984-98f86346985f \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
   -d '{
@@ -511,7 +511,7 @@ Deletes a project and its associated files.
 
 **Example Request:**
 ```bash
-curl -X DELETE http://localhost:5000/api/v1/projects/7f9c82e0-8beC-4ab8-8984-98f86346985f \
+curl -X DELETE http://44.211.200.94:5000/api/v1/projects/7f9c82e0-8beC-4ab8-8984-98f86346985f \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 
@@ -551,7 +551,7 @@ Uploads a ZIP file for a project.
 
 **Example Request:**
 ```bash
-curl -X POST http://localhost:5000/api/v1/projects/7f9c82e0-8beC-4ab8-8984-98f86346985f/upload \
+curl -X POST http://44.211.200.94:5000/api/v1/projects/7f9c82e0-8beC-4ab8-8984-98f86346985f/upload \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
   -F "projectZip=@/path/to/project.zip"
 ```
@@ -597,7 +597,7 @@ Downloads the ZIP file for a project.
 
 **Example Request:**
 ```bash
-curl -X GET http://localhost:5000/api/v1/projects/7f9c82e0-8beC-4ab8-8984-98f86346985f/download \
+curl -X GET http://44.211.200.94:5000/api/v1/projects/7f9c82e0-8beC-4ab8-8984-98f86346985f/download \
   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." \
   --output project.zip
 ```

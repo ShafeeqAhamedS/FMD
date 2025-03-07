@@ -73,7 +73,7 @@ const CheckDeployment = () => {
             if (jobStatusResponse.data.result === 'SUCCESS') {
               const ec2PublicIP = await getDeploymentInstanceIP();
               if (ec2PublicIP) {
-                await retryRequest(() => axios.put(`http://localhost:5000/api/v1/projects/${projectId}`, { 
+                await retryRequest(() => axios.put(`http://44.211.200.94:5000/api/v1/projects/${projectId}`, { 
                   ec2PublicIP: ec2PublicIP, 
                   status: 'deployed'
                 }, {
@@ -83,7 +83,7 @@ const CheckDeployment = () => {
                 }));
                 setStatus(`Job completed successfully! Deployed at IP: ${ec2PublicIP}`);
               } else {
-                await retryRequest(() => axios.put(`http://localhost:5000/api/v1/projects/${projectId}`, { 
+                await retryRequest(() => axios.put(`http://44.211.200.94:5000/api/v1/projects/${projectId}`, { 
                   status: 'failed'
                 }, {
                   headers: {
@@ -94,7 +94,7 @@ const CheckDeployment = () => {
               }
               logger.info('Job completed successfully');
             } else {
-              await retryRequest(() => axios.put(`http://localhost:5000/api/v1/projects/${projectId}`, { 
+              await retryRequest(() => axios.put(`http://44.211.200.94:5000/api/v1/projects/${projectId}`, { 
                 status: 'failed'
               }, {
                 headers: {
@@ -125,7 +125,7 @@ const CheckDeployment = () => {
       const initializeDeployment = async () => {
         try {
           // Set initial status to processing
-          await retryRequest(() => axios.put(`http://localhost:5000/api/v1/projects/${projectId}`, { 
+          await retryRequest(() => axios.put(`http://44.211.200.94:5000/api/v1/projects/${projectId}`, { 
             status: 'processing'
           }, {
             headers: {

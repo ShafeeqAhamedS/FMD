@@ -179,7 +179,7 @@ This structure provides better organization and access control as each user's fi
 The API is documented using Swagger UI. You can access the interactive documentation at:
 
 ```
-http://localhost:5000/api-docs
+http://44.211.200.94:5000/api-docs
 ```
 
 ## Error Handling
