@@ -12,7 +12,7 @@ const CheckDeployment = () => {
 
   const getDeploymentInstanceIP = async () => {
     try {
-      const jobStatusResponse = await axios.get(`http://localhost:8080/job/FMD/lastBuild/consoleText`, {
+      const jobStatusResponse = await axios.get(`https://6de6-223-178-86-7.ngrok-free.app/job/FMD/lastBuild/consoleText`, {
         auth: {
           username: 'admin',
           password: '1196611b0d87af2b9d9df124ec2d755b21'
@@ -60,7 +60,7 @@ const CheckDeployment = () => {
         logger.info(`Checking build number: ${buildNumber}`);
 
         const checkJobStatus = async () => {
-          const jobStatusResponse = await axios.get(`http://localhost:8080/job/FMD/${buildNumber}/api/json`, {
+          const jobStatusResponse = await axios.get(`https://6de6-223-178-86-7.ngrok-free.app/job/FMD/${buildNumber}/api/json`, {
             auth: {
               username: 'admin',
               password: '1196611b0d87af2b9d9df124ec2d755b21'

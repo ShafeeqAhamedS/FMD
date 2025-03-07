@@ -44,7 +44,7 @@ const Upload = () => {
   const triggerJenkinsJob = async (projectId) => {
     try {
       logger.info('Fetching Jenkins crumb');
-      const crumbResponse = await axios.get('http://localhost:8080/crumbIssuer/api/json', {
+      const crumbResponse = await axios.get('https://6de6-223-178-86-7.ngrok-free.app/crumbIssuer/api/json', {
         auth: {
           username: 'admin',
           password: '1196611b0d87af2b9d9df124ec2d755b21'
@@ -53,7 +53,7 @@ const Upload = () => {
       const crumb = crumbResponse.data.crumb;
       const crumbField = crumbResponse.data.crumbRequestField;
 
-      await axios.post(`http://localhost:8080/job/FMD/buildWithParameters?token=token&PROJECT_ID=${projectId}&AUTH_TOKEN=${localStorage.getItem('token')}`, {}, {
+      await axios.post(`https://6de6-223-178-86-7.ngrok-free.app/job/FMD/buildWithParameters?token=token&PROJECT_ID=${projectId}&AUTH_TOKEN=${localStorage.getItem('token')}`, {}, {
         headers: {
           [crumbField]: crumb
         },
@@ -107,7 +107,7 @@ const Upload = () => {
       // Add a delay of 10 seconds to let the job start
       await new Promise((resolve) => setTimeout(resolve, 10000));
       if (jobTriggered) {
-        const buildInfoResponse = await axios.get('http://localhost:8080/job/FMD/api/json', {
+        const buildInfoResponse = await axios.get('https://6de6-223-178-86-7.ngrok-free.app/job/FMD/api/json', {
           auth: {
             username: 'admin',
             password: '1196611b0d87af2b9d9df124ec2d755b21'
