@@ -18,5 +18,14 @@
     "_id": "e44930f2-4a97-4a13-b630-9c384c237b51",
     "createdAt": "2025-03-01T10:24:57.028Z",
     "updatedAt": "2025-03-01T10:47:48.092Z"
+  },
+  {
+    "name": "Test User",
+    "email": "testing@gmail.com",
+    "password": "$2a$10$kvZ9eIUIYh5qu2494syPj.RKnJAWbiLjH24T.cBrX8wppP5HP2tp2",
+    "profilePic": "/uploads/default-profile.png",
+    "bio": "",
+    "_id": "844827a3-7961-4169-9b67-fd7a9530bc3d",
+    "createdAt": "2025-03-12T15:51:37.369Z"
   }
 ]
